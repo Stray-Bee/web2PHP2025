@@ -4,7 +4,7 @@ class usuarioDAO{
     private $conexao;
     public function __construct(){
         $this->conexao = new PDO(
-            "mysql:host=localhost; dbname=bdeverton",
+            "mysql:host=localhost; dbname=banco",
             "root", ""
         );
     }
@@ -24,4 +24,28 @@ class usuarioDAO{
         $sql->execute();
         return $sql->fetchAll();
     }
+
+    public function retornarUnico($id): mixed {
+        $sql = $this->conexao->prepare(query: "
+        SELECT * FROM usuario WHERE id=:id
+        ");
+        $sql->bindValue(param: ":id", value: $id);
+        $sql->execute();
+        return $sql->fetch();
+    }
+
+    public function editar(usuario $obj){
+        $sql = $this->conexao->prepare(
+            "UPDATE usuario SET
+            nome=:nome, senha=:senha, email=:email
+            WHERE id=:id"
+        );
+        $sql->bindValue(":nome", $obj->getNome());
+        $sql->bindValue(":email", $obj->getEmail());
+        $sql->bindValue(":senha", $obj->getSenha());
+        $sql->bindValue(":id", $obj->getID());
+        return $sql->execute();
+    }
+
+
 }
