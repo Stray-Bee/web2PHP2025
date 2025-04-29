@@ -47,11 +47,11 @@ class usuarioDAO{
         return $sql->execute();
     }
 
-    public functiondelete($id): bool{
-        $sql = $this->conexao->prepare(query: "
+    public function delete($id) {
+        $sql = $this->conexao->prepare("
         DELETE FROM usuario WHERE id=:id
         ");
-        $sql->bindValue(param: ":id", value: $id);
+        $sql->bindValue(":id", $id);
         return $sql->execute();
     }
 

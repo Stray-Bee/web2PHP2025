@@ -1,7 +1,7 @@
 <?php
 $id = $_GET["id"];
-include_once "../usuario.class.php";
-include_once "../usuarioDAO.class.php";
+include_once "../class/usuario.class.php";
+include_once "../class/usuarioDAO.class.php";
 
 $objDAO = new usuarioDAO();
 $retorno = $objDAO->retornarUnico($id);
